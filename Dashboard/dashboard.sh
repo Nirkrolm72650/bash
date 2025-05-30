@@ -4,14 +4,17 @@
 MODULES_DIR="./lib"
 
 # === Chargement des modules si disponibles ===
-for module in "MODULES_DIR"/*.sh; do
+for module in "$MODULES_DIR"/*.sh; do
 	# Vérifie si le fichier est bien un fichier lisible
 	[ -f "$module" ] && source "$module"
 done
 
+declare -F system_info && echo "✅ Module system_info chargé !" || echo "❌ Fonction system_info non trouvée"
+
+
 # === Fonction de bannière ===
 show_banner(){
-	clear
+	clear	
     	echo "===================================="
     	echo "        🖥️  BASHBOARD SYSTEM         "
     	echo "===================================="
@@ -32,11 +35,11 @@ main_menu(){
 		read -rp "Choix > " choix
 
 		case $choix in
-			1) system_info ;;
-			2) process_info ;;
-			3) network_info ;;
-			4) users_info ;;
-			5) utils_menu ;; # Sous-menu utilitaires
+			1) clear; system_info ;;
+			2) clear; process_info ;;
+			3) clear; network_info ;;
+			4) clear; users_info ;;
+			5) clear; utils_menu ;; # Sous-menu utilitaires
 			0) echo "👋 Au revoir !"; exit 0 ;;
 			*) echo "❌ Choix invalide? Appuyez sur Entrée pouur continuer..."; read ;;
 		esac
